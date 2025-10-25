@@ -1,0 +1,67 @@
+
+Step 1 :- train/test/split
+	from sklearn.model_selection import train_test_split
+	X_train,X_test,y_train,y_test = train_test_split(input_df), outputdf, test_size=0.2, random_state=42(seeding value))
+
+Step 2 :- Applying imputation(getting value for filling missing data) 
+	
+	si_age = SimpleImputer() # will give mean value
+
+	⚙️ 1️⃣ fit()
+
+		Learns (computes) some parameters from the training data.
+
+		For example,
+
+		In SimpleImputer(strategy='mean'), it calculates the mean of that column.
+
+		In a scaler, it computes min, max, mean, std, etc.
+
+		si_age.fit(X_train[['Age']])
+
+	⚙️ 2️⃣ transform()
+
+		Actually applies the learned parameters (from fit()) to the data.
+
+		It doesn’t learn anything new — it just uses what was learned earlier.
+
+		X_train_age = si_age.transform(X_train[['Age']])
+		X_test_age = si_age.transform(X_test[['Age']])
+
+	⚙️ 3️⃣ fit_transform()
+
+		A shortcut for doing both fit and transform together on the same data.
+
+		Commonly used only on training data.
+
+		X_train_age = si_age.fit_transform(X_train[['Age']])
+
+Step 3 :- # one hot encoding Sex and Embarked
+	 OneHotEncoder creates binary columns — one per category.
+
+
+Step 4 :- Make prediction
+
+	clf = DecisionTreeClassifier()
+	clf.fit(X_train_transformed,y_train)
+	y_pred = clf.predict(X_test_transformed)
+
+Step 5 :- Accuracy test
+
+	from sklearn.metrics import accuracy_score
+	accuracy_score(y_test,y_pred)
+
+Step 6 :- Coverting trained model into a byte stream in order to use it on production 
+
+	pipeline Pros:
+
+		All preprocessing + model in one object
+
+		Automatically applies the same transformations to train/test/predict
+
+		Easy to serialize and deploy
+
+		Reduces human errors
+
+
+
