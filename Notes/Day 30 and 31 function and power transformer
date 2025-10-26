@@ -1,0 +1,69 @@
+Transformation	Handles Negatives	Auto Lambda	Best For
+Log				No					No			Simple right-skew
+Box-Cox			No					Yes			Positive skewed data
+Yeo-Johnson		Yes					Yes			General use
+Square root		No					No			Count data
+Reciprocal		No					No			Strong right-skew
+
+
+🧠 1. What are Transformations?
+
+	Transformations are mathematical operations applied to variables (features) to change their distribution — often to make data more normal-like, reduce skewness, or stabilize variance.
+
+	They’re very common in feature engineering, statistical modeling, and machine learning preprocessing.
+
+⚙️ 2. Function Transformation (General Concept)
+	Definition:
+
+	A function transformation means applying any mathematical function to your data to change its scale, spread, or shape.
+
+	💡 Purpose:
+
+	To reduce skewness
+
+	To stabilize variance
+
+	To make relationships more linear
+
+	To improve model performance
+
+
+⚡ 3. Power Transformation (Special Type of Function Transformation)
+
+	A power transformation is a specific kind of function transformation where you apply a power function to make it more Gaussian (normal).
+
+	These are used to stabilize variance and reduce skewness.
+
+🧩 4. Two Common Power Transformations
+	(A) Box-Cox Transformation
+
+	Only works with positive values (> 0)
+
+	Searches for the best λ (lambda) value to make data as normal as possible
+
+
+	(B) Yeo-Johnson Transformation
+
+	Works with both positive and negative values
+
+	A generalization of Box-Cox
+
+
+Many models (like Linear Regression, Logistic Regression) assume normally distributed residuals.
+
+Tree-based models (like Random Forests) don’t need it, but scaling helps convergence for others (like SVM, KNN, Neural Nets).
+
+Helps handle heteroscedasticity (unequal variance across features).
+
+
+🧠 Bonus: Model Selection Strategy (Step-by-Step)
+
+	Start simple → Linear / Logistic Regression
+
+	Check residuals → If not linear → move to tree-based
+
+	If data is large and complex → try XGBoost or LightGBM
+
+	If data is unstructured (image/text) → use Deep Learning
+
+	Compare models using cross-validation → choose best performance
